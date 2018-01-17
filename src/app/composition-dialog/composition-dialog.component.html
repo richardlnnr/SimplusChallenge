@@ -1,0 +1,79 @@
+<form #compositionForm="ngForm" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>{{data.title}}</h2>
+  <mat-dialog-content fxLayout="row" fxLayoutWrap>
+      <mat-form-field fxFlex="100">
+        <input matInput placeholder="Código DUN" [(ngModel)]="model.dunCode" name="dunCode" required>
+      </mat-form-field>
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Unidade embalagem" [(ngModel)]="model.packingUnit" name="packingUnit" required>
+            <mat-option *ngFor="let packingUnit of packingUnits" [value]="packingUnit">
+              {{packingUnit}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>        
+      <mat-form-field fxFlex="100">
+        <input matInput placeholder="Quantidade" [(ngModel)]="model.quantity" name="quantity" type="number" required>
+      </mat-form-field>
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="Altura" [(ngModel)]="model.height" name="height" required>
+      </mat-form-field>      
+      <mat-form-field  fxFlex="68" fxFlexOffset="28px">
+          <mat-select placeholder="Unidade" [(ngModel)]="model.heightUnit" name="heightUnit" required>
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{unit}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field> 
+
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="Largura" [(ngModel)]="model.width" name="width" required>
+      </mat-form-field>      
+      <mat-form-field fxFlex="68" fxFlexOffset="28px">
+          <mat-select placeholder="Unidade" [(ngModel)]="model.widthUnit" name="widthUnit" required>
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{unit}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field> 
+      
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="Profundidade" [(ngModel)]="model.depth" name="depth" required>
+      </mat-form-field>      
+      <mat-form-field fxFlex="68" fxFlexOffset="28px">
+          <mat-select placeholder="Unidade" [(ngModel)]="model.depthUnit" name="depthUnit" required>
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{unit}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field> 
+    
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="Peso bruto" [(ngModel)]="model.grossHeight" name="grossHeight" required>
+      </mat-form-field>      
+      <mat-form-field fxFlex="68" fxFlexOffset="28px">
+          <mat-select placeholder="Unidade" [(ngModel)]="model.grossHeightUnit" name="grossHeightUnit" required>
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{unit}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field> 
+    
+      <mat-form-field fxFlex="30">
+        <input matInput placeholder="Peso líquido" [(ngModel)]="model.netHeight" name="netHeight" required>
+      </mat-form-field>      
+      <mat-form-field fxFlex="68" fxFlexOffset="28px">
+          <mat-select placeholder="Unidade" [(ngModel)]="model.netHeightUnit" name="netHeightUnit" required>
+            <mat-option *ngFor="let unit of units" [value]="unit">
+              {{unit}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field> 
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <!-- [mat-dialog-close]="true" -->
+    <button mat-button type="submit" [disabled]="!compositionForm.form.valid">Salvar</button>
+  </mat-dialog-actions>
+  </form>
+  
