@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { CompositionComponent } from './composition/composition.component';
@@ -30,7 +33,10 @@ import { CompositionService } from './composition/composition.service';
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpModule
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [CompositionService],
   bootstrap: [AppComponent]

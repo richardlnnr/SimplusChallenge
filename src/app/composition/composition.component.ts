@@ -1,11 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
 import { MatSort, MatDialog } from '@angular/material';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
 
 
 import { Composition } from '../composition';
@@ -27,49 +21,25 @@ export class CompositionComponent implements OnInit {
     this.loadData();
   }
 
-  loadData() {
-    this.compositionService.getAll()
-    .then(compositions => this.compositions = compositions);
+  loadData(): void {
+    this.compositionService.getCompositions()
+    .subscribe(compositions => this.compositions = compositions);
   }
 
-  delete(composition: Composition) {
-    this.compositionService.delete(composition._id)
-    .then(() => this.loadData());
+  delete(composition: Composition): void {
+    this.compositions = this.compositions.filter(h => h !== composition);
+    this.compositionService.deleteComposition(composition._id).subscribe();
   }
 
-  edit(composition: Composition) {
-    this.compositionService.getById(composition._id)
-    .then(returnCandidate => {
-    });
-
+  edit(composition: Composition): void {
     const dialogRef = this.dialog.open(CompositionDialogComponent, {
-      data: {title: 'Editar composição', model: {...composition}}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.compositionService.update(result)
-        .then(returnCandidate => {
-          this.loadData();
-        });
-      }
+      data: { dunCode: composition.dunCode}
     });
   }
 
-  add() {
-    const newComposition = new Composition();
-
+  add(): void {
     const dialogRef = this.dialog.open(CompositionDialogComponent, {
-      data: {title: 'Adicionar composição', model: newComposition}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.compositionService.create(result)
-        .then(addedComposition => {
-          this.compositions.push(addedComposition);
-        });
-      }
+      data: { dunCode: null}
     });
   }
 }

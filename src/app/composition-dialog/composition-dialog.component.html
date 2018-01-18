@@ -6,9 +6,9 @@
       </mat-form-field>
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Unidade embalagem" [(ngModel)]="model.packingUnit" name="packingUnit" required>
-            <mat-option *ngFor="let packingUnit of packingUnits" [value]="packingUnit">
-              {{packingUnit}}
-            </mat-option>
+          <mat-option *ngFor="let unit of packingUnits" [value]="unit.Key">
+            {{unit.Value}}
+          </mat-option>
           </mat-select>
       </mat-form-field>        
       <mat-form-field fxFlex="100">
@@ -19,8 +19,8 @@
       </mat-form-field>      
       <mat-form-field  fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.heightUnit" name="heightUnit" required>
-            <mat-option *ngFor="let unit of units" [value]="unit">
-              {{unit}}
+            <mat-option *ngFor="let unit of unitsLength" [value]="unit.Key">
+              {{unit.Value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -30,8 +30,8 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.widthUnit" name="widthUnit" required>
-            <mat-option *ngFor="let unit of units" [value]="unit">
-              {{unit}}
+            <mat-option *ngFor="let unit of unitsLength" [value]="unit.Key">
+              {{unit.Value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -41,8 +41,8 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.depthUnit" name="depthUnit" required>
-            <mat-option *ngFor="let unit of units" [value]="unit">
-              {{unit}}
+            <mat-option *ngFor="let unit of unitsLength" [value]="unit.Key">
+              {{unit.Value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -52,8 +52,8 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.grossHeightUnit" name="grossHeightUnit" required>
-            <mat-option *ngFor="let unit of units" [value]="unit">
-              {{unit}}
+            <mat-option *ngFor="let unit of unitsHeight" [value]="unit.Key">
+              {{unit.Value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -63,8 +63,8 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.netHeightUnit" name="netHeightUnit" required>
-            <mat-option *ngFor="let unit of units" [value]="unit">
-              {{unit}}
+            <mat-option *ngFor="let unit of unitsHeight" [value]="unit.Key">
+              {{unit.Value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 

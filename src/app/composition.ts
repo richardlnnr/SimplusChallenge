@@ -2,7 +2,7 @@ export class Composition {
     _id: string;
     dunCode: string;
     packingUnit: string;
-    quantity: string;
+    quantity: number;
     height: number;
     heightUnit: string;
     width: number;
@@ -13,4 +13,5 @@ export class Composition {
     grossHeightUnit: string;
     netHeight: number;
     netHeightUnit: string;
+    levels: Composition[];
 }
