@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Composition } from '../composition';
+import { Composition } from './composition';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +15,7 @@ const httpOptions = {
 @Injectable()
 export class CompositionService {
 
-  private compositionsApi = 'api/compositiones';
+  private compositionsApi = 'api/compositions';
 
   candidates: Composition[] = [];
 
@@ -23,7 +23,10 @@ export class CompositionService {
 
   // Get all data from the API
   getCompositions(): Observable<Composition[]> {
-    return this.http.get<Composition[]>(this.compositionsApi);
+    return this.http.get<Composition[]>(this.compositionsApi).pipe(
+      tap(heroes => this.log(`fetched compositions`)),
+      catchError(this.handleError('getCompositions', []))
+    );
   }
 
   getComposition(id: string): Observable<Composition> {

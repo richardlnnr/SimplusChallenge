@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutGap="16px" fxFlex>
   <mat-list>
-    <mat-list-item *ngFor="let composition of compositions">{{composition.name}}</mat-list-item>
+    <mat-list-item *ngFor="let composition of compositions">{{composition.dunCode}}</mat-list-item>
   </mat-list>
   <button mat-fab (click)="add()" class="fab-bottom-right">
     <mat-icon>add</mat-icon>

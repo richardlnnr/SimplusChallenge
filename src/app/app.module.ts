@@ -14,7 +14,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { AppComponent } from './app.component';
 import { CompositionComponent } from './composition/composition.component';
 import { CompositionDialogComponent } from './composition-dialog/composition-dialog.component';
-import { CompositionService } from './composition/composition.service';
+import { CompositionService } from './composition.service';
 
 
 @NgModule({

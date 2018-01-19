@@ -3,7 +3,7 @@ import { MatSort, MatDialog } from '@angular/material';
 
 
 import { Composition } from '../composition';
-import { CompositionService } from './composition.service';
+import { CompositionService } from '../composition.service';
 import { CompositionDialogComponent } from '../composition-dialog/composition-dialog.component';
 
 @Component({
@@ -23,7 +23,7 @@ export class CompositionComponent implements OnInit {
 
   loadData(): void {
     this.compositionService.getCompositions()
-    .subscribe(compositions => this.compositions = compositions);
+    .subscribe(compositions => { this.compositions = compositions; console.log(compositions); });
   }
 
   delete(composition: Composition): void {
