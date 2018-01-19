@@ -1,5 +1,5 @@
 export class Composition {
-    _id: string;
+    id: number;
     dunCode: string;
     packingUnit: string;
     quantity: number;

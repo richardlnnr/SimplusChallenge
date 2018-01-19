@@ -26,20 +26,13 @@ export class CompositionComponent implements OnInit {
     .subscribe(compositions => { this.compositions = compositions; console.log(compositions); });
   }
 
-  delete(composition: Composition): void {
-    this.compositions = this.compositions.filter(h => h !== composition);
-    this.compositionService.deleteComposition(composition._id).subscribe();
-  }
-
-  edit(composition: Composition): void {
-    const dialogRef = this.dialog.open(CompositionDialogComponent, {
-      data: { dunCode: composition.dunCode}
-    });
-  }
-
   add(): void {
     const dialogRef = this.dialog.open(CompositionDialogComponent, {
-      data: { dunCode: null}
+      data: { id: null}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadData();
     });
   }
 }

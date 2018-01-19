@@ -1,7 +1,73 @@
 <div fxLayout="row" fxLayoutGap="16px" fxFlex>
-  <mat-list>
-    <mat-list-item *ngFor="let composition of compositions">{{composition.dunCode}}</mat-list-item>
-  </mat-list>
+  <mat-accordion fxFlex>
+    <mat-expansion-panel *ngFor="let composition of compositions">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Composição Logística {{composition.id}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <mat-list>
+          <mat-list-item>
+              <p mat-line fxLayout="row">
+                <span fxFlex="30">GTN</span>
+                <span fxFlex="25">Unidade da embalagem</span>
+                <span fxFlex="25">Quantidade da embalagem</span>
+                <span fxFlex="20">Ações</span>
+              </p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+      </mat-list>
+      <app-composition-list [composition]="composition"></app-composition-list>
+      <!-- <mat-nav-list>
+        <div>
+            <mat-list-item>
+              <p mat-line fxLayout="row">
+                <span fxFlex="30">{{composition.dunCode}}</span>
+                <span fxFlex="25">{{composition.packingUnit}}</span>
+                <span fxFlex="25">{{composition.quantity}}</span>
+                <span fxFlex="20">
+                    <button mat-icon-button>
+                      <mat-icon aria-label="Add">link</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="edit(composition)">
+                      <mat-icon aria-label="Edit">mode_edit</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                      <mat-icon aria-label="Delete">delete_forever</mat-icon>
+                    </button>                    
+                </span>
+              </p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-nav-list style="margin-left:30px;" *ngFor="let level of composition.levels">
+                  <div>
+                    <mat-list-item>
+                      <p mat-line fxLayout="row">
+                          <span fxFlex="30">{{level.dunCode}}</span>
+                          <span fxFlex="25">{{level.packingUnit}}</span>
+                          <span fxFlex="25">{{level.quantity}}</span>
+                          <span fxFlex="20">
+                              <button mat-icon-button>
+                                  <mat-icon aria-label="Add">link</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="edit(level)">
+                                  <mat-icon aria-label="Edit">mode_edit</mat-icon>
+                                </button>
+                                <button mat-icon-button>
+                                  <mat-icon aria-label="Delete">delete_forever</mat-icon>
+                                </button>                              
+                          </span>
+                        </p>
+                    </mat-list-item>
+                  </div>
+            </mat-nav-list>
+        </div>
+    </mat-nav-list> -->
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
   <button mat-fab (click)="add()" class="fab-bottom-right">
     <mat-icon>add</mat-icon>
   </button>

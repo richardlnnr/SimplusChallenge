@@ -29,7 +29,7 @@ export class CompositionService {
     );
   }
 
-  getComposition(id: string): Observable<Composition> {
+  getComposition(id: number): Observable<Composition> {
     const url = `${this.compositionsApi}/${id}`;
     return this.http.get<Composition>(url).pipe(
       tap(_ => this.log(`fetched Composition id=${id}`)),
@@ -43,14 +43,14 @@ export class CompositionService {
   addComposition (composition: Composition): Observable<Composition> {
     return this.http.post<Composition>(this.compositionsApi, composition, httpOptions).pipe(
       // tslint:disable-next-line:no-shadowed-variable
-      tap((composition: Composition) => this.log(`added composition w/ id=${composition._id}`)),
+      tap((composition: Composition) => this.log(`added composition w/ id=${composition.id}`)),
       catchError(this.handleError<Composition>('addComposition'))
     );
   }
 
   /** DELETE: delete the composition from the server */
-  deleteComposition (composition: Composition | string): Observable<Composition> {
-    const id = typeof composition === 'string' ? composition : composition._id;
+  deleteComposition (composition: Composition | number): Observable<Composition> {
+    const id = typeof composition === 'number' ? composition : composition.id;
     const url = `${this.compositionsApi}/${id}`;
 
     return this.http.delete<Composition>(url, httpOptions).pipe(
@@ -62,7 +62,7 @@ export class CompositionService {
   /** PUT: update the composition on the server */
   updateComposition (composition: Composition): Observable<any> {
     return this.http.put(this.compositionsApi, composition, httpOptions).pipe(
-      tap(_ => this.log(`updated composition id=${composition._id}`)),
+      tap(_ => this.log(`updated composition id=${composition.dunCode}`)),
       catchError(this.handleError<any>('updateComposition'))
     );
   }
@@ -90,6 +90,7 @@ export class CompositionService {
 
   /** Log a compositionService message with the MessageService */
   private log(message: string) {
+    console.log(message);
     // this.messageService.add('compositionService: ' + message);
   }
 

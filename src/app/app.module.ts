@@ -15,13 +15,15 @@ import { AppComponent } from './app.component';
 import { CompositionComponent } from './composition/composition.component';
 import { CompositionDialogComponent } from './composition-dialog/composition-dialog.component';
 import { CompositionService } from './composition.service';
+import { CompositionListComponent } from './composition-list/composition-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CompositionComponent,
-    CompositionDialogComponent
+    CompositionDialogComponent,
+    CompositionListComponent
   ],
   entryComponents: [
     CompositionDialogComponent
