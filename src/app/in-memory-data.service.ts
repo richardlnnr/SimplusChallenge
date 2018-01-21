@@ -3,31 +3,13 @@ import { Composition } from './composition';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const composition1 = {id: 2, dunCode: '7896071300186', packingUnit: 'U', quantity: 1, height: 10, heightUnit: 'CM',
-    width: 15, widthUnit: 'M', depth: 5, depthUnit: 'MM', grossHeight: 2, grossHeightUnit: 'KG', netHeight: 1800,
-    netHeightUnit: 'G', levels: []};
-
-    const composition1Level1 = {id: 1, dunCode: '12345678', packingUnit: 'PC', quantity: 1, height: 10, heightUnit: 'CM', width: 15,
-     widthUnit: 'M', depth: 5, depthUnit: 'MM', grossHeight: 2, grossHeightUnit: 'KG', netHeight: 1800, netHeightUnit: 'G', levels: []};
-    composition1.levels.push(composition1Level1);
-
-    const composition1Level2 = {id: 0, dunCode: '111222333444555', packingUnit: 'CX', quantity: 1, height: 10, heightUnit: 'CM', width: 15,
-     widthUnit: 'M', depth: 5, depthUnit: 'MM', grossHeight: 2, grossHeightUnit: 'KG', netHeight: 1800, netHeightUnit: 'G', levels: []};
-     composition1Level1.levels.push(composition1Level2);
-
-     const composition2 = {id: 5, dunCode: '7896071300186', packingUnit: 'U', quantity: 1, height: 10, heightUnit: 'CM',
-     width: 15, widthUnit: 'M', depth: 5, depthUnit: 'MM', grossHeight: 2, grossHeightUnit: 'KG', netHeight: 1800,
-     netHeightUnit: 'G', levels: []};
-
-     const composition2Level1 = {id: 4, dunCode: '12345678', packingUnit: 'PC', quantity: 1, height: 10, heightUnit: 'CM', width: 15,
-      widthUnit: 'M', depth: 5, depthUnit: 'MM', grossHeight: 2, grossHeightUnit: 'KG', netHeight: 1800, netHeightUnit: 'G', levels: []};
-      composition2.levels.push(composition2Level1);
-
-     const composition2Level2 = {id: 3, dunCode: '111222333444555', packingUnit: 'CX', quantity: 1, height: 10, heightUnit: 'CM', width: 15,
-      widthUnit: 'M', depth: 5, depthUnit: 'MM', grossHeight: 2, grossHeightUnit: 'KG', netHeight: 1800, netHeightUnit: 'G', levels: []};
-      composition2Level1.levels.push(composition2Level2);
-
-    const compositions: Composition[] = [ composition1, composition2 ];
+    const compositions: Composition[] = [
+      new Composition(0, 1, 1, '7896071300186', '0', 1, 10, '1', 15, '2', 5, '0', 2, '2', 1800, '0'),
+      new Composition(1, 2, 1, '12345678', '2', 1, 10, '1', 15, '2', 5, '0', 2, '2', 1800, '0'),
+      new Composition(2, null, 1, '111222333444555', '3', 1, 10, '1', 15, '2', 5, '0', 2, '2', 1800, '0'),
+      new Composition(3, 4, 2, '7896071300186', '0', 1, 10, '1', 15, '2', 5, '0', 2, '2', 1800, '0'),
+      new Composition(4, null, 2, '22334455', '3', 3, 10, '1', 15, '2', 5, '0', 2, '2', 1800, '0')
+    ];
     return {compositions};
   }
 }

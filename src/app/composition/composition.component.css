@@ -3,3 +3,7 @@
     right: 16px;
     bottom: 16px;
   }
+
+  .list-background {
+    background-color: rgba(0,0,0,.02);
+  }

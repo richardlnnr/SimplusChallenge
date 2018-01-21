@@ -1,15 +1,15 @@
 <form #compositionForm="ngForm" (ngSubmit)="onSubmit()">
-  <h2 mat-dialog-title>{{title}}</h2>
+  <h2 mat-dialog-title>Dados Logísticos</h2>
   <mat-dialog-content fxLayout="row" fxLayoutWrap>
       <mat-form-field fxFlex="100">
         <input matInput placeholder="Código DUN" [(ngModel)]="model.dunCode" name="dunCode" required>
       </mat-form-field>
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Unidade embalagem" [(ngModel)]="model.packingUnit" name="packingUnit" required>
-          <mat-option *ngFor="let unit of packingUnits" [value]="unit.Key">
-            {{unit.Value}}
+          <mat-option *ngFor="let unit of packingUnits | keys" [value]="unit.key">
+            {{unit.value}}
           </mat-option>
-          </mat-select>
+        </mat-select>
       </mat-form-field>        
       <mat-form-field fxFlex="100">
         <input matInput placeholder="Quantidade" [(ngModel)]="model.quantity" name="quantity" type="number" required>
@@ -19,8 +19,8 @@
       </mat-form-field>      
       <mat-form-field  fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.heightUnit" name="heightUnit" required>
-            <mat-option *ngFor="let unit of unitsLength" [value]="unit.Key">
-              {{unit.Value}}
+            <mat-option *ngFor="let unit of lengthUnits | keys" [value]="unit.key">
+              {{unit.value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -30,8 +30,8 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.widthUnit" name="widthUnit" required>
-            <mat-option *ngFor="let unit of unitsLength" [value]="unit.Key">
-              {{unit.Value}}
+            <mat-option *ngFor="let unit of lengthUnits | keys" [value]="unit.key">
+              {{unit.value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -41,8 +41,8 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.depthUnit" name="depthUnit" required>
-            <mat-option *ngFor="let unit of unitsLength" [value]="unit.Key">
-              {{unit.Value}}
+            <mat-option *ngFor="let unit of lengthUnits | keys" [value]="unit.key">
+              {{unit.value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -52,8 +52,8 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.grossHeightUnit" name="grossHeightUnit" required>
-            <mat-option *ngFor="let unit of unitsHeight" [value]="unit.Key">
-              {{unit.Value}}
+            <mat-option *ngFor="let unit of heightUnits | keys" [value]="unit.key">
+              {{unit.value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
@@ -63,17 +63,15 @@
       </mat-form-field>      
       <mat-form-field fxFlex="68" fxFlexOffset="28px">
           <mat-select placeholder="Unidade" [(ngModel)]="model.netHeightUnit" name="netHeightUnit" required>
-            <mat-option *ngFor="let unit of unitsHeight" [value]="unit.Key">
-              {{unit.Value}}
+            <mat-option *ngFor="let unit of heightUnits | keys" [value]="unit.key">
+              {{unit.value}}
             </mat-option>
           </mat-select>
       </mat-form-field> 
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancelar</button>
-    <!-- Can optionally provide a result for the closing dialog. -->
-    <!-- [mat-dialog-close]="true" -->
-    <button mat-button type="submit" [disabled]="!compositionForm.form.valid">{{isAddMode ? 'Adicionar' : 'Salvar'}}</button>
+    <button mat-button type="submit" [disabled]="!compositionForm.form.valid">Salvar</button>
   </mat-dialog-actions>
   </form>
   

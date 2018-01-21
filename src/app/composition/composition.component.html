@@ -1,12 +1,11 @@
-<div fxLayout="row" fxLayoutGap="16px" fxFlex>
+<div fxLayout="row" fxFlex>
   <mat-accordion fxFlex>
-    <mat-expansion-panel *ngFor="let composition of compositions">
+    <mat-expansion-panel *ngFor="let composition of compositions | groupByRic:'compositionNumber'">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Composição Logística {{composition.id}}
+          Composição Logística {{composition.key}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-  
       <mat-list>
           <mat-list-item>
               <p mat-line fxLayout="row">
@@ -18,53 +17,26 @@
             </mat-list-item>
             <mat-divider></mat-divider>
       </mat-list>
-      <app-composition-list [composition]="composition"></app-composition-list>
-      <!-- <mat-nav-list>
-        <div>
-            <mat-list-item>
-              <p mat-line fxLayout="row">
-                <span fxFlex="30">{{composition.dunCode}}</span>
-                <span fxFlex="25">{{composition.packingUnit}}</span>
-                <span fxFlex="25">{{composition.quantity}}</span>
+      <mat-nav-list>
+          <mat-list-item *ngFor="let level of composition.value | orderBy:'-id'; index as index; first as isFirst; odd as isOdd" [ngClass]="{'list-background': isOdd}">
+            <p mat-line fxLayout="row" fxLayoutAlign=" center" >
+                <span fxFlex="30" [ngStyle]="{'padding-left': (index * 40) + 'px'}">{{level.dunCode}}</span>
+                <span fxFlex="25">{{packingUnits[level.packingUnit]}}</span>
+                <span fxFlex="25">{{level.quantity}}</span>
                 <span fxFlex="20">
                     <button mat-icon-button>
-                      <mat-icon aria-label="Add">link</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="edit(composition)">
-                      <mat-icon aria-label="Edit">mode_edit</mat-icon>
-                    </button>
-                    <button mat-icon-button>
-                      <mat-icon aria-label="Delete">delete_forever</mat-icon>
-                    </button>                    
+                        <mat-icon aria-label="Add" (click)="add(level)">link</mat-icon>
+                      </button>
+                      <button mat-icon-button (click)="edit(level)">
+                        <mat-icon aria-label="Edit">mode_edit</mat-icon>
+                      </button>
+                      <button mat-icon-button (click)="delete(level)" *ngIf="isFirst">
+                        <mat-icon aria-label="Delete">delete_forever</mat-icon>
+                      </button>                              
                 </span>
               </p>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-nav-list style="margin-left:30px;" *ngFor="let level of composition.levels">
-                  <div>
-                    <mat-list-item>
-                      <p mat-line fxLayout="row">
-                          <span fxFlex="30">{{level.dunCode}}</span>
-                          <span fxFlex="25">{{level.packingUnit}}</span>
-                          <span fxFlex="25">{{level.quantity}}</span>
-                          <span fxFlex="20">
-                              <button mat-icon-button>
-                                  <mat-icon aria-label="Add">link</mat-icon>
-                                </button>
-                                <button mat-icon-button (click)="edit(level)">
-                                  <mat-icon aria-label="Edit">mode_edit</mat-icon>
-                                </button>
-                                <button mat-icon-button>
-                                  <mat-icon aria-label="Delete">delete_forever</mat-icon>
-                                </button>                              
-                          </span>
-                        </p>
-                    </mat-list-item>
-                  </div>
-            </mat-nav-list>
-        </div>
-    </mat-nav-list> -->
-
+          </mat-list-item>
+      </mat-nav-list>      
     </mat-expansion-panel>
   </mat-accordion>
 

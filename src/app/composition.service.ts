@@ -18,6 +18,8 @@ export class CompositionService {
   private compositionsApi = 'api/compositions';
 
   candidates: Composition[] = [];
+  compositionNumber = 2;
+
 
   constructor(private http: HttpClient) {}
 
@@ -27,6 +29,14 @@ export class CompositionService {
       tap(heroes => this.log(`fetched compositions`)),
       catchError(this.handleError('getCompositions', []))
     );
+  }
+
+  getCompositionNumberKey(): number {
+    return ++this.compositionNumber;
+  }
+
+  createDefaultComposition(): Composition {
+    return new Composition(null, null, null, '', '0', 1, 1, '1', 1, '1', 1, '1', 1, '0', 1, '0');
   }
 
   getComposition(id: number): Observable<Composition> {
@@ -42,8 +52,7 @@ export class CompositionService {
   /** POST: add a new composition to the server */
   addComposition (composition: Composition): Observable<Composition> {
     return this.http.post<Composition>(this.compositionsApi, composition, httpOptions).pipe(
-      // tslint:disable-next-line:no-shadowed-variable
-      tap((composition: Composition) => this.log(`added composition w/ id=${composition.id}`)),
+      tap((compositionTap: Composition) => this.log(`added composition w/ id=${compositionTap.id}`)),
       catchError(this.handleError<Composition>('addComposition'))
     );
   }
