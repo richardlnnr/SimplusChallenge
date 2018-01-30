@@ -26,8 +26,8 @@ app.use(forceSSL());
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
 
-app.route('/*').get(function(req, res) { 
-  return res.sendFile(path.join(config.root, 'index.html')); 
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, '/public', 'index.html'));
 });
 // Start the app by listening on the default
 // Heroku port
