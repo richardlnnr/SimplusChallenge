@@ -36,7 +36,7 @@ export class CompositionService {
   }
 
   createDefaultComposition(): Composition {
-    return new Composition(null, null, null, '', '0', 1, 1, '1', 1, '1', 1, '1', 1, '0', 1, '0');
+    return new Composition(null, null, null, null, '', '0', 1, 1, '1', 1, '1', 1, '1', 1, '0', 1, '0');
   }
 
   getComposition(id: number): Observable<Composition> {
@@ -76,6 +76,26 @@ export class CompositionService {
     );
   }
 
+  // Gera o indice da composicao
+  generateIndexForComposition(compositionNumber: number, fatherId: number, index: number): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const url = `${this.compositionsApi}/?compositionNumber=${compositionNumber}&&fatherId=${fatherId}`;
+      this.http.get<Composition[]>(url).subscribe(compositions => {
+        if (compositions.length > 0) {
+          const composition = compositions[0];
+          composition.index = index;
+          index++;
+
+          this.updateComposition(composition).subscribe(() => {
+            resolve(this.generateIndexForComposition(compositionNumber, composition.id, index));
+          });
+
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  }
 
   /**
    * Handle Http operation that failed.

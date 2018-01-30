@@ -25,30 +25,37 @@ export class CompositionComponent implements OnInit {
 
   loadData(): void {
     this.compositionService.getCompositions()
-    .subscribe(compositions => this.compositions = compositions);
+    .subscribe(compositions => {
+      this.compositions = compositions;
+    }
+    );
   }
 
-  add(composition: Composition): void {
+  add(compositionSon: Composition): void {
     const newComposition = this.compositionService.createDefaultComposition();
     const dialogRef = this.showDialog(newComposition);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Se a composição estiver preenchida, manter o número da composição
-        if (composition) {
-          result.compositionNumber = composition.compositionNumber;
+        if (compositionSon) {
+          result.compositionNumber = compositionSon.compositionNumber;
+          if (compositionSon.fatherId) {
+            result = this.updateFather(result, compositionSon.fatherId);
+          }
         } else {
           result.compositionNumber = this.compositionService.getCompositionNumberKey();
         }
 
         this.compositionService.addComposition(result).subscribe(addedComposition => {
-          // Atualiza o código pai no filho
-          if (composition) {
-            composition.fatherId = addedComposition.id;
-            this.compositionService.updateComposition(composition);
+          if (compositionSon) {
+            compositionSon = this.updateFather(compositionSon, addedComposition.id);
+            this.compositionService.updateComposition(compositionSon).subscribe(() => {
+              this.compositionService.generateIndexForComposition(compositionSon.compositionNumber, null, 1).then(() => this.loadData());
+            });
+          } else {
+            this.loadData();
           }
-
-          this.loadData();
         });
       }
     });
@@ -74,6 +81,16 @@ export class CompositionComponent implements OnInit {
     return this.dialog.open(CompositionDialogComponent, {
       data: { model: composition}
     });
+  }
+
+  // Atualiza o código pai no filho
+  private updateFather(compositionSon: Composition, fatherId: number): Composition {
+    compositionSon.fatherId = fatherId;
+    return compositionSon;
+  }
+
+  private generateIndex(): void {
+
   }
 
 }

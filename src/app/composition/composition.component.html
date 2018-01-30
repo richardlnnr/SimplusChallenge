@@ -1,6 +1,6 @@
-<div fxLayout="row" fxFlex>
-  <mat-accordion fxFlex>
-    <mat-expansion-panel *ngFor="let composition of compositions | groupByRic:'compositionNumber'">
+<div fxLayout="row" fxFlex class="content">
+  <mat-accordion fxFlex [multi]="true">
+    <mat-expansion-panel *ngFor="let composition of compositions | groupByRic:'compositionNumber'" [expanded]="composition.expanded">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Composição Logística {{composition.key}}
@@ -18,9 +18,9 @@
             <mat-divider></mat-divider>
       </mat-list>
       <mat-nav-list>
-          <mat-list-item *ngFor="let level of composition.value | orderBy:'-id'; index as index; first as isFirst; odd as isOdd" [ngClass]="{'list-background': isOdd}">
+          <mat-list-item *ngFor="let level of composition.value | orderBy:'index'; first as isFirst; odd as isOdd" [ngClass]="{'list-background': isOdd}">
             <p mat-line fxLayout="row" fxLayoutAlign=" center" >
-                <span fxFlex="30" [ngStyle]="{'padding-left': (index * 40) + 'px'}">{{level.dunCode}}</span>
+                <span fxFlex="30" [ngStyle]="{'padding-left': (level.index * 40) + 'px'}">{{level.dunCode}}</span>
                 <span fxFlex="25">{{packingUnits[level.packingUnit]}}</span>
                 <span fxFlex="25">{{level.quantity}}</span>
                 <span fxFlex="20">

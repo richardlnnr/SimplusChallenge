@@ -19,6 +19,7 @@ import { CompositionDialogComponent } from './composition-dialog/composition-dia
 import { CompositionService } from './composition.service';
 import { GroupByRicPipe } from './group-by-ric.pipe';
 import { KeysPipe } from './keys.pipe';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { KeysPipe } from './keys.pipe';
     CompositionComponent,
     CompositionDialogComponent,
     GroupByRicPipe,
-    KeysPipe
+    KeysPipe,
+    NavbarComponent
   ],
   entryComponents: [
     CompositionDialogComponent

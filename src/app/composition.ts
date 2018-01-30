@@ -1,10 +1,12 @@
 export class Composition {
-    constructor(id: number, fatherId: number, compositionNumber: number, dunCode: string, packingUnit: string, quantity: number,
-     height: number, heightUnit: string, width: number, widthUnit: string, depth: number, depthUnit: string, grossHeight: number,
-     grossHeightUnit: string, netHeight: number, netHeightUnit: string) {
+    constructor(id: number, fatherId: number, compositionNumber: number, index: number, dunCode: string,
+        packingUnit: string, quantity: number, height: number, heightUnit: string, width: number,
+        widthUnit: string, depth: number, depthUnit: string, grossHeight: number, grossHeightUnit: string,
+        netHeight: number, netHeightUnit: string) {
         this.id = id;
         this.fatherId = fatherId;
         this.compositionNumber = compositionNumber;
+        this.index = index;
         this.dunCode = dunCode;
         this.packingUnit = packingUnit;
         this.quantity = quantity;
@@ -18,9 +20,11 @@ export class Composition {
         this.grossHeightUnit = grossHeightUnit;
         this.netHeight = netHeight;
         this.netHeightUnit = netHeightUnit;
+        this.expanded = false;
     }
 
     id: number;
+    index: number;
     fatherId: number;
     compositionNumber: number;
     dunCode: string;
@@ -36,4 +40,5 @@ export class Composition {
     grossHeightUnit: string;
     netHeight: number;
     netHeightUnit: string;
+    expanded: boolean;
 }
